@@ -9,17 +9,35 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail]=useState('');
     const [password, setPassword]=useState('');
+    const [error, setError]=useState('');
+    const [info, setInfo] = useState({});
+ 
+      const handleLogin=async (e)=>{
+        e.preventDefault();
+        console.log(email);
+        console.log(password);
+        setEmail('');
+        setPassword('');
+        const response = fetch('http://localhost:8585/user/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userName: email,
+        password: password
+      })
+    })
+      .then(response => response.json())
+      .then(data => {console.log(data);
+        navigate("/dash", { state: { data: data } });}
+    )
+      .catch(error => console.error(error))    
+       
+       
 
-  const handleLogin=(e)=>{
-    e.preventDefault();
-    console.log(email);
-    console.log(password);
-    setEmail('');
-    setPassword('');
-    setTimeout(()=>{
-      navigate('/');
-  },3000)
-  }
+      }
+    
 
   return (
     
@@ -30,14 +48,14 @@ const Login = () => {
             <br></br>
             <h1>Login</h1>
             <hr></hr>
-            {/* {successMsg&&<>
-                <div className='success-msg'>{successMsg}</div>
+             {error&&<>
+                <div className='success-msg'>{error}</div>
                 <br></br>
-            </>} */}
+            </>} 
       <Form style={{width:"80%", marginLeft:"10%", marginTop:"10%"}} onSubmit={handleLogin}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" required onChange={(e)=>setEmail(e.target.value)} value={email}/>
+        <Form.Control type="text" placeholder="Enter email" required onChange={(e)=>setEmail(e.target.value)} value={email}/>
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">

@@ -4,7 +4,11 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
+
 const Home = () => {
+
+
+
     return (
         <div>
            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -39,6 +43,9 @@ const Home = () => {
     <div>
       <Container style={{marginTop:"5%"}}>
         <h1>Tools Management System</h1>
+
+        <h2>Welcome!!!</h2>
+               
       </Container>
     </div>
         </div>

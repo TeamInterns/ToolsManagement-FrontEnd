@@ -28,9 +28,10 @@ const Dashboard = () => {
       </div>
     );
   } else {
+    // The role is user
     return (
       <div>
-        <NavBar />
+        
         <UserTableRender state={state}/>
       </div>
     );

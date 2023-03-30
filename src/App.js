@@ -6,6 +6,7 @@ import Signup from './Signup'
 import Dashboard from './Dashboard'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import UserAddTools from './UserAddTools'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/signup" element={<Signup/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/dash" element={<Dashboard/>}/>
+        <Route path="/addTools" element={<UserAddTools/>}/>
       </Routes>
     </BrowserRouter>
   );

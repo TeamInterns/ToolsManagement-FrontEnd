@@ -1,10 +1,35 @@
+
+import React from "react";
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
+import {Link} from "react-router-dom";
 function UserTableRender({state}){
 
+    console.log(state);
     const userTableContents = JSON.parse(JSON.stringify(state.data));
-    userTableContents.pop();
+    const userRole=userTableContents.pop();
+
+
     
 
     return (
+        <>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand href="#home">ThoughtClan</Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav>
+          <Link to={{pathname:"/addTools"}} state={{userRole:userRole}}> Add tools</Link>
+            </Nav>
+            <Nav>
+              <Nav.Link href="/login">Logout</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
         <div className="admin-table-container">
       <br></br>
       <br></br>
@@ -49,6 +74,7 @@ function UserTableRender({state}){
         </tbody>
       </table>
     </div>
+    </>
     )
 
 }

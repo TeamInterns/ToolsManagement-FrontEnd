@@ -12,6 +12,7 @@ const Dashboard = () => {
 
   const lastObject = data.at(-1);
   const userRole = lastObject["userRole"];
+  console.log(state);
 
   if (userRole ==="admin") {
     return (

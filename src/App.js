@@ -5,6 +5,7 @@ import Login from './Login'
 import Signup from './Signup'
 import Dashboard from './Dashboard'
 import UserAddTools from './UserAddTools'
+import Notifications from './Notifications'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/dash" element={<Dashboard/>}/>
         <Route path="/addTools" element={<UserAddTools/>}/>
+        <Route path="/notifications" element={<Notifications/>}/>
       </Routes>
     </BrowserRouter>
   );

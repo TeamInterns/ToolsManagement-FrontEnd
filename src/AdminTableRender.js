@@ -1,5 +1,4 @@
 import React from 'react';
-import './AdminTable.css';
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -31,6 +30,7 @@ const AdminTableRender = ({ state }) => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
     <div className="admin-table-container">
       <br></br>
       <br></br>
@@ -59,3 +59,6 @@ const AdminTableRender = ({ state }) => {
 };
 
 export default AdminTableRender;
+
+
+

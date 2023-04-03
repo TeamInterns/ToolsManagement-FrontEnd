@@ -30,32 +30,39 @@ function UserAddTools() {
       .catch(error => console.error(error));
   },[]);
 
-  // let [num, setNum]= useState(0);
-//   let incNum =()=>{
-//     if(num<10)
-//     {
-//     setNum(Number(num)+1);
-//     }
-//   };
-//   let decNum = () => {
-//      if(num>0)
-//      {
-//       setNum(num - 1);
-//      }
-//   }
-//  let handleChange = (e)=>{
-//    setNum(e.target.value);
-//   }
-
 
 useEffect(()=>{
   const initialCounters = tools.map(tool => 0);
   setCounters(initialCounters);
   },[tools])
 
-  function notifcationRequest(toolId,toolName,index,userid)
+
+  function notifcationRequest(toolId,toolName,counterValue,userid)
   {
-      console.log(toolId,toolName,index,userid)
+      console.log(toolId,toolName,counterValue,userid)
+  
+      const data = {
+          master: {
+              toolId: toolId
+          },
+          toolName: toolName,
+          user: {
+              id: userid
+          },
+          quantity: counterValue
+      };
+  
+      fetch('http://localhost:8585/user/addNotification', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+      })
+      .then(response => {
+        console.log(response)
+          // handle success response
+      });
   }
 
 
@@ -69,7 +76,7 @@ useEffect(()=>{
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#features">About</Nav.Link>
+              {/* <Nav.Link href="#features">About</Nav.Link> */}
               <Nav.Link href="/addTools">Add Tools</Nav.Link>
               {/* <NavDropdown title="Tools">
                 <NavDropdown.Item href="#action/3.1">Spanner</NavDropdown.Item>
@@ -105,13 +112,6 @@ useEffect(()=>{
               <td>{tool.toolName}</td>
               <td>{tool.quantity}</td>
               <td>
-              {/* <button type="button" class="btn btn-secondary" onClick={incNum}>+</button>
-              <span style={{marginRight:"10%", marginLeft:"10%"}}>{num}</span>
-              <button type="button" class="btn btn-secondary" onClick={decNum}>-</button> */}
-
-                {/* <button type="button" class="btn btn-secondary" onClick={() => setNum(num + 1)}>+</button>
-                <span style={{marginRight:"10%", marginLeft:"10%"}}>{num}</span>
-                <button type="button" class="btn btn-secondary" onClick={() => setNum(num - 1)}>-</button> */}
 
               <button type="button" className="btn btn-secondary" onClick={() => {
                 const newCounters = [...counters];

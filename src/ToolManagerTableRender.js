@@ -1,14 +1,14 @@
+
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-
 function ToolManagerTableRender({state}){
 
     const ToolsTableContents = JSON.parse(JSON.stringify(state.data));
     ToolsTableContents.pop();
 
     return (
+
         <div>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
@@ -16,13 +16,13 @@ function ToolManagerTableRender({state}){
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#features">About</Nav.Link>
-              <NavDropdown title="Tools">
+              <Nav.Link href="/notifications">Notifications</Nav.Link>
+              {/* <NavDropdown title="Tools">
                 <NavDropdown.Item href="#action/3.1">Spanner</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Hammer</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.3">Plier</NavDropdown.Item>
                 <NavDropdown.Divider />
-              </NavDropdown>
+              </NavDropdown> */}
             </Nav>
             <Nav>
               <Nav.Link href="/login">Logout</Nav.Link>
@@ -30,6 +30,7 @@ function ToolManagerTableRender({state}){
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
         <div className="admin-table-container">
       <br></br>
       <br></br>

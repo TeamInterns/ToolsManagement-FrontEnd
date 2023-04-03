@@ -9,7 +9,6 @@ function UserTableRender({state}){
     const userTableContents = JSON.parse(JSON.stringify(state.data));
     const userRole=userTableContents.pop();
     
-
     return (
         <div>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -18,8 +17,7 @@ function UserTableRender({state}){
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#features">About</Nav.Link>
-              <Link to={{pathname:"/addTools"}} state={{userRole:userRole}}> Add tools</Link>
+              <Link className="addlink" to={{pathname:"/addTools"}} state={{userRole:userRole}}> Add tools</Link>
               {/* <NavDropdown title="Tools">
                 <NavDropdown.Item href="#action/3.1">Spanner</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Hammer</NavDropdown.Item>
@@ -33,6 +31,7 @@ function UserTableRender({state}){
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
         <div className="admin-table-container">
       <br></br>
       <br></br>
@@ -78,6 +77,7 @@ function UserTableRender({state}){
       </table>
     </div>
     </div>
+
     )
 
 }

@@ -1,16 +1,44 @@
-
+import { useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-function ToolManagerTableRender({state}){
 
-    const ToolsTableContents = JSON.parse(JSON.stringify(state.data));
-    ToolsTableContents.pop();
+function ToolManagerTableRender({ state }) {
+  const MasterTableContents = JSON.parse(JSON.stringify(state.data));
+  MasterTableContents.pop();
 
-    return (
+  const [selectedToolId, setSelectedToolId] = useState(
+    MasterTableContents.map(() => {
+      return false;
+    })
+  );
+  const [ToolsTabledata,setToolsTabledata]=useState([]);
 
-        <div>
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+  
+
+    // function to handle every Row selected. Call the api to request tool
+  const handleRowClick = (tool) => {
+    let clickedToolId = MasterTableContents.map(() => {
+      return false;
+    });
+    clickedToolId[tool.toolId - 1] = true;
+    setSelectedToolId(clickedToolId);
+
+    const response = fetch(`http://localhost:8585/ToolObjects/getToolObjectsByToolId/${tool.toolId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => setToolsTabledata(data))
+      .catch((error) => console.error(error));
+
+  };
+
+  return (
+    <>
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="#home">ThoughtClan</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -30,51 +58,77 @@ function ToolManagerTableRender({state}){
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
-        <div className="admin-table-container">
+    <div className="admin-table-container">
       <br></br>
       <br></br>
       <h1>List of All tools in the Inventory</h1>
       <table className="admin-table">
         <thead>
           <tr>
-            <th>Tool Number</th>
-            <th>Manufacturer</th>
-            <th>Max usage Capacity</th>
-            <th>Number Of time Used</th>
-            <th>Price</th>
-            <th>Usage Status</th>
-            <th>Uses Left</th>
-            <th>Worn Out Limit</th>
-            <th>Worn Out percentage</th>
+            <th>Tool ID</th>
+            <th>Tool Name</th>
+            <th>Quantity</th>
           </tr>
         </thead>
         <tbody>
-            {
-                ToolsTableContents.map(dataArray=>{
-                    return(
-                        <tr key={dataArray.tool_object_Id}>
-                            <td>{dataArray.tool_object_Id}</td>
-                            <td>{dataArray.manufacturer}</td>
-                            <td>{dataArray.max_usage_capacity}</td>
-                            <td>{dataArray.no_of_times_used}</td>
-                            <td>{dataArray.price}</td>
-                            <td>{dataArray.usage_status.toString()}</td>
-                            <td>{dataArray.uses_left}</td>
-                            <td>{dataArray.wornOut_limit}</td>
-                            <td>{dataArray.worn_out_percentage}</td>
+          {MasterTableContents.map((tool) => (
+            <>
+              <tr key={tool.toolId} onClick={() => handleRowClick(tool)}>
+                <td>{tool.toolId}</td>
+                <td>{tool.toolName}</td>
+                <td>{tool.quantity}</td>
+              </tr>
+              {selectedToolId[tool.toolId - 1] && ToolsTabledata.map((toolData)=>
+              (
+                <>
+                  <tr>
+                  <td colSpan="3">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Tool Instance ID</th>
+                          <th>Tool Name</th>
+                          <th>Manufacturer</th>
+                          <th>Max Usage Capacity</th>
+                          <th>Number Of Times Used</th>
+                          <th>Price</th>
+                          <th>Usage status</th>
+                          <th>User Name</th>
+                          <th>Role</th>
+                          <th>Wourn Out Limit</th>
+                          <th>Worn Out Percentage</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>{toolData.tool_object_Id}</td>
+                          <td>{toolData.master.toolName}</td>
+                          <td>{toolData.manufacturer}</td>
+                          <td>{toolData.max_usage_capacity}</td>
+                          <td>{toolData.no_of_times_used}</td>
+                          <td>{toolData.price}</td>
+                          <td>{toolData.usage_status.toString()}</td>
+                          <td>{toolData.user.name}</td>
+                          <td>{toolData.user.role}</td>
+                          <td>{toolData.wornOut_limit}</td>
+                          <td>{toolData.worn_out_percentage}</td>
 
 
                         </tr>
-                    );
-                })
-            }
-          
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                </>
+
+              )) }
+            </>
+          ))}
         </tbody>
       </table>
     </div>
-    </div>
-    )
-
+    </>
+  );
 }
+
 export default ToolManagerTableRender;

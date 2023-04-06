@@ -6,8 +6,10 @@ import Signup from './Signup'
 import Dashboard from './Dashboard'
 import UserAddTools from './UserAddTools'
 import Notifications from './Notifications'
+import ToolsTableRender from './ToolsTableRender'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route path="/dash" element={<Dashboard/>}/>
         <Route path="/addTools" element={<UserAddTools/>}/>
         <Route path="/notifications" element={<Notifications/>}/>
+        <Route path="/toolsrender" element={<ToolsTableRender/>}/>
+
       </Routes>
     </BrowserRouter>
   );

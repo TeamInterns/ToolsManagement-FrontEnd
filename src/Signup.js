@@ -3,8 +3,10 @@ import {useNavigate} from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Row, Col, Image} from 'react-bootstrap';
-
-const options = ["User", "Manager", "Admin"];
+import {auth} from './Config/Config'
+import { createUserWithEmailAndPassword} from 'firebase/auth'
+ 
+const options = ["user", "toolManager", "admin"];
 
 const Signup = () => {
   const navigate = useNavigate()
@@ -21,6 +23,32 @@ const Signup = () => {
     console.log(email)
     console.log(password)
     console.log(role)
+    createUserWithEmailAndPassword(auth,email,password).then((userCredential) => {
+      // User signed up successfully
+      console.log(userCredential);
+    })
+    .catch((error) => {
+      // Handle signup errors
+      console.log(error);
+    });
+
+    const data={
+      "name":fullName,
+      "email":email,
+      "password":password,
+      "role":role, 
+  }
+
+  fetch("http://localhost:8585/user/registerUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then((response) => {
+      console.log(response);
+    });
+
     setFullname('');
     setEmail('');
     setPassword('');

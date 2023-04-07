@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-// import NavDropdown from "react-bootstrap/NavDropdown";
+import { useNavigate } from 'react-router-dom';
 import Container from "react-bootstrap/Container";
 import { useLocation } from "react-router-dom";
-
+import logo from './Img/logo.png';
 import {ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {FaTools} from 'react-icons/fa';
 
 function UserAddTools() {
+  const navigate = useNavigate();
+
   const [tools, setTools] = useState([]);
   const [counters, setCounters] = useState([]);
 
@@ -78,7 +81,7 @@ function UserAddTools() {
     <div>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="/">ThoughtClan</Navbar.Brand>
+          <Navbar.Brand href="/"><img className="logo" src={logo} alt="Logo" /></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
@@ -91,10 +94,17 @@ function UserAddTools() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <div className="breadcrumps">
+          <span>
+            <span className="breadcrump" onClick={()=>{navigate(-1);}}>Dashboard </span>
+            /
+            <span className="breadcrump" onClick={()=>{window.location.reload(false)}}> Add Tools</span>
+          </span>
+          </div>     
       <div className="admin-table-container">
         <br></br>
+        <h2>MASTER TABLE DATA</h2>
         <br></br>
-        <h1>Master Table Data</h1>
         <table className="admin-table">
           <thead>
             <tr>
@@ -109,7 +119,7 @@ function UserAddTools() {
             {tools.map((tool, index) => (
               <tr key={tool.toolId}>
                 <td>{tool.toolId}</td>
-                <td>{tool.toolName}</td>
+                <td><FaTools className="fa"/>{tool.toolName}</td>
                 <td>{tool.quantity}</td>
                 <td>
                   <button

@@ -15,6 +15,8 @@ const Signup = () => {
     const [email, setEmail]=useState('');
     const [password, setPassword]=useState('');
     const [role, setRole]=useState(options[0]);
+    const [errorMsg, setErrorMsg]=useState('');
+    const [successMsg, setSuccessMsg]=useState('');
 
   const handleSignup=(e)=>{
     e.preventDefault();
@@ -27,10 +29,7 @@ const Signup = () => {
       // User signed up successfully
       console.log(userCredential);
     })
-    .catch((error) => {
-      // Handle signup errors
-      console.log(error);
-    });
+    .catch(error=>setErrorMsg(error.message));
 
     const data={
       "name":fullName,
@@ -48,27 +47,29 @@ const Signup = () => {
     }).then((response) => {
       console.log(response);
     });
-
+    setSuccessMsg('Signup Successfull');
+    setErrorMsg('');
     setFullname('');
     setEmail('');
     setPassword('');
     setTimeout(()=>{
+      setSuccessMsg('');
       navigate('/login');
-  },3000)
+  },2000)
   }
 
   return (
-    <div className='container'>
-      <Row className="landing">
-        <Col >
+    <div className='container signup'>
+      <Row className="landing size">
+       
             <br></br>
             <br></br>
-            <h1>Sign Up</h1>
+            <h2>SIGN UP</h2>
             <hr></hr>
-            {/* {successMsg&&<>
+            {successMsg&&<>
                 <div className='success-msg'>{successMsg}</div>
-                <br></br>
-            </>} */}
+                
+            </>}
            <Form style={{width:"80%", marginLeft:"10%", marginTop:"10%"}} onSubmit={handleSignup}>
            <Form.Group className="mb-3" controlId="formBasicName">
         <Form.Label>User Name</Form.Label>
@@ -91,27 +92,23 @@ const Signup = () => {
       <Form.Select aria-label="Default select example" value={role} 
        onChange={e => setRole(e.target.value)}>
       {options.map((value) => (
-          <option value={value} key={value}>
+          <option className='option' value={value} key={value}>
             {value}
           </option>
         ))}
     </Form.Select>
     </Form.Group>
-      <Button variant="primary" type="submit">
+    <span className="buttons">
+      <button type="submit" className="button">
         Submit
-      </Button>
+      </button>
+      </span>
     </Form>
-            {/* {errorMsg&&<>
+            {errorMsg&&<>
                 <br></br>
                 <div className='error-msg'>{errorMsg}</div>                
-            </>} */}
-       </Col>
-        
-        <Col >
-        <div style={{width:"80%", marginRight:"10%", marginTop:"20%"}}>
-           <Image style={{width:"100%"}} src="https://img.freepik.com/free-vector/job-interview-conversation_74855-7566.jpg?w=996&t=st=1677682708~exp=1677683308~hmac=723981cd2fa17a8357b560e4526fc1fcade77dabd945a4273570fbfcebfab9f5"  /> 
-        </div>
-        </Col>
+            </>}
+
       </Row>     
         </div>
     )

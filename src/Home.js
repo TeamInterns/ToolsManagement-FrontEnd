@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-
+import logo from './Img/logo.png';
 
 const Home = () => {
 
@@ -13,23 +13,14 @@ const Home = () => {
         <div>
            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">ThoughtClan</Navbar.Brand>
+        <Navbar.Brand href="/">
+        <img className="logo" src={logo} alt="Logo" />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#features">About</Nav.Link>
-            {/* <Nav.Link href="#pricing">Tools</Nav.Link> */}
-            <NavDropdown title="Tools" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Spanner</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Hammer
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Plier</NavDropdown.Item>
-              <NavDropdown.Divider />
-              {/* <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item> */}
-            </NavDropdown>
+            <Nav.Link href="#features"></Nav.Link>
+           
           </Nav>
           <Nav>
             <Nav.Link href="/login">Login</Nav.Link>
@@ -42,9 +33,14 @@ const Home = () => {
     </Navbar>
     <div>
       <Container style={{marginTop:"5%"}}>
-        <h1>Tools Management System</h1>
+        <h2>TOOL MANAGEMENT SYSTEM</h2>
 
-        <h2>Welcome!!!</h2>
+        <h3 style={{marginTop:"5%"}}>Welcome!!!</h3>
+
+        <div className="buttons">
+          <a href="/login" className="button">LOGIN</a>
+          <a href="/signup" className="button">SIGNUP</a>
+        </div>
                
       </Container>
     </div>

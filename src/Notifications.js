@@ -4,6 +4,9 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import {ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import logo from './Img/logo.png';
+import { useNavigate } from 'react-router-dom';
+import {FaTools} from 'react-icons/fa';
 
 const Notifications = () => {
     
@@ -11,6 +14,7 @@ const Notifications = () => {
     const [approve,setApprove]=useState(false);
     const [decline,setDecline]=useState(false);
     console.log(notifications)
+    const navigate = useNavigate();
   
 
     useEffect(() => {
@@ -104,7 +108,7 @@ const Notifications = () => {
     <div>
                 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="/dash">ThoughtClan</Navbar.Brand>
+          <Navbar.Brand href="/dash"><img className="logo" src={logo} alt="Logo" /></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
@@ -117,10 +121,18 @@ const Notifications = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <div className="breadcrumps">
+          <span>
+            <span className="breadcrump" onClick={()=>{navigate(-1);}}>Dashboard </span>
+            /
+            <span className="breadcrump" onClick={()=>{window.location.reload(false)}}> Notifications</span>
+          </span>
+          </div>  
       <div className="admin-table-container">
+
       <br></br>
+      <h2>NOTIFICATIONS</h2>
       <br></br>
-      <h1>Notifcations</h1>
       <table className="admin-table">
         <thead>
           <tr>
@@ -139,7 +151,7 @@ const Notifications = () => {
           {notifications.map((notification,index) => (
             <tr key={notification.notificationID}>
               <td>{notification.notificationID}</td>
-              <td>{notification.toolName}</td>
+              <td><FaTools className="fa"/>{notification.toolName}</td>
               <td>{notification.manufacturer}</td>
               <td>{notification.quantity}</td>
               <td>{notification.status.toString()}</td>

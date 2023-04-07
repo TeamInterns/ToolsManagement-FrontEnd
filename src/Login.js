@@ -11,7 +11,8 @@ const Login = () => {
   const [email, setEmail]=useState('');
 
     const [password, setPassword]=useState('');
-    const [error, setError]=useState('');
+    const [errorMsg, setErrorMsg]=useState('');
+    const [successMsg, setSuccessMsg]=useState('');
 
  
       const handleLogin=async (e)=>{
@@ -21,12 +22,17 @@ const Login = () => {
         console.log(email);
         signInWithEmailAndPassword(auth,email,password).then((credentials)=>{
         console.log("login successful");  
-        
+        setSuccessMsg('Login Successfull');
         setEmail('');
         setPassword('');
-        callFetch();
+        setErrorMsg('');
+        setTimeout(()=>{
+          setSuccessMsg('');
+          callFetch();
+      },2000)
        
-    }).catch(error => console.error(error));
+       
+    }).catch(error=>setErrorMsg(error.message));
   }    
     
 
@@ -53,17 +59,20 @@ const Login = () => {
 
   return (
     
-    <div className='container'>
-      <Row className="landing">
-        <Col >
+    <div className='container login'>
+
+      <Row className="landing size">
+     
         <br></br>
             <br></br>
-            <h1>Login</h1>
+            <h2>LOGIN</h2>
             <hr></hr>
-             {error&&<>
-                <div className='success-msg'>{error}</div>
-                <br></br>
-            </>} 
+
+            {successMsg&&<>
+                <div className='success-msg'>{successMsg}</div>
+                
+            </>}
+           
       <Form style={{width:"80%", marginLeft:"10%", marginTop:"10%"}} onSubmit={handleLogin}>
 
       <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -75,23 +84,15 @@ const Login = () => {
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="Password" required onChange={(e)=>setPassword(e.target.value)} value={password}/>
       </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
+      <span className='buttons'><button type="submit" className="button">SUBMIT</button></span>
     </Form>
-            {/* {errorMsg&&<>
+    {errorMsg&&<>
                 <br></br>
                 <div className='error-msg'>{errorMsg}</div>                
-            </>} */}
-        </Col>
-        
-        <Col >
-        <div style={{width:"80%", marginRight:"10%", marginTop:"20%"}}>
-           <Image style={{width:"100%"}} src="https://img.freepik.com/free-vector/job-interview-conversation_74855-7566.jpg?w=996&t=st=1677682708~exp=1677683308~hmac=723981cd2fa17a8357b560e4526fc1fcade77dabd945a4273570fbfcebfab9f5"  /> 
-        </div>
-        </Col>
+            </>}
+  
       </Row>
-            
+
         </div>
   )
 }

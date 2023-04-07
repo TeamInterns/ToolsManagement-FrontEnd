@@ -3,6 +3,8 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from 'react-router-dom';
+import logo from './Img/logo.png';
+import {FaTools} from 'react-icons/fa';
 
 function ToolManagerTableRender({ state }) {
   const MasterTableContents = JSON.parse(JSON.stringify(state.data));
@@ -45,7 +47,7 @@ function ToolManagerTableRender({ state }) {
     <>
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">ThoughtClan</Navbar.Brand>
+          <Navbar.Brand href="#home"><img className="logo" src={logo} alt="Logo" /></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
@@ -66,22 +68,23 @@ function ToolManagerTableRender({ state }) {
     <div className="admin-table-container">
       <br></br>
       <br></br>
-      <h1>List of All tools in the Inventory</h1>
+      <h2>LIST OF MASTER TOOLS</h2>
+      <br></br>
       <table className="admin-table">
         <thead>
           <tr>
-            <th>Tool ID</th>
-            <th>Tool Name</th>
-            <th>Quantity</th>
+            <th>TOOL ID</th>
+            <th>TOOL NAME</th>
+            <th>QUANTITY</th>
           </tr>
         </thead>
         <tbody>
           {MasterTableContents.map((tool) => (
             <>
               <tr key={tool.toolId} onClick={() => handleRowClick(tool)}>
-                <td>{tool.toolId}</td>
-                <td>{tool.toolName}</td>
-                <td>{tool.quantity}</td>
+                <td  className="pointer">{tool.toolId}</td>
+                <td className="pointer"><FaTools className="fa"/>{tool.toolName}</td>
+                <td className="pointer">{tool.quantity}</td>
               </tr>
 
             </>

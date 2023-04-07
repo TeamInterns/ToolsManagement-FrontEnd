@@ -3,6 +3,8 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import logo from './Img/logo.png';
+import {FaTools} from 'react-icons/fa';
 
 const AdminTableRender = ({ state }) => {
   const adminTableContents = JSON.parse(JSON.stringify(state.data));
@@ -12,17 +14,12 @@ const AdminTableRender = ({ state }) => {
     <div>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">ThoughtClan</Navbar.Brand>
+          <Navbar.Brand href="#home"><img className="logo" src={logo} alt="Logo" /></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#features">About</Nav.Link>
-              <NavDropdown title="Tools">
-                <NavDropdown.Item href="#action/3.1">Spanner</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Hammer</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Plier</NavDropdown.Item>
-                <NavDropdown.Divider />
-              </NavDropdown>
+              <Nav.Link href="#features"></Nav.Link>
+              
             </Nav>
             <Nav>
               <Nav.Link href="/login">Logout</Nav.Link>
@@ -34,7 +31,8 @@ const AdminTableRender = ({ state }) => {
     <div className="admin-table-container">
       <br></br>
       <br></br>
-      <h1>Master Table Data</h1>
+      <h2>MASTER TABLE DATA</h2>
+      <br></br>
       <table className="admin-table">
         <thead>
           <tr>
@@ -47,7 +45,7 @@ const AdminTableRender = ({ state }) => {
           {adminTableContents.map((tool) => (
             <tr key={tool.toolId}>
               <td>{tool.toolId}</td>
-              <td>{tool.toolName}</td>
+              <td><FaTools className="fa"/>{tool.toolName}</td>
               <td>{tool.quantity}</td>
             </tr>
           ))}

@@ -3,6 +3,8 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 // import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
+import logo from './Img/logo.png'
+import {FaTools} from 'react-icons/fa';
 
 function UserTableRender({state}){
 
@@ -13,11 +15,11 @@ function UserTableRender({state}){
         <div>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="/">ThoughtClan</Navbar.Brand>
+          <Navbar.Brand href="/"><img className="logo" src={logo} alt="Logo" /></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Link className="addlink" to={{pathname:"/addTools"}} state={{userRole:userRole}}> Add tools</Link>
+              <Link className="addlink" to={{pathname:"/addTools"}} state={{userRole:userRole}}> Add Tools</Link>
               {/* <NavDropdown title="Tools">
                 <NavDropdown.Item href="#action/3.1">Spanner</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Hammer</NavDropdown.Item>
@@ -35,7 +37,8 @@ function UserTableRender({state}){
         <div className="admin-table-container">
       <br></br>
       <br></br>
-      <h1>Users Owned Tools</h1>
+      <h2>USER OWNED TOOLS</h2>
+      <br></br>
       <table className="admin-table">
         <thead>
           <tr>
@@ -57,7 +60,7 @@ function UserTableRender({state}){
                     return(
                         <tr key={dataArray.tool_object_Id}>
                             <td>{dataArray.tool_object_Id}</td>
-                            <td>{dataArray.master.toolName}</td>
+                            <td><FaTools className="fa"/>{dataArray.master.toolName}</td>
                             <td>{dataArray.manufacturer}</td>
                             <td>{dataArray.max_usage_capacity}</td>
                             <td>{dataArray.no_of_times_used}</td>

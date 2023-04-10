@@ -2,9 +2,16 @@ import React,{useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {Row, Col, Image} from 'react-bootstrap';
+import {Row, Col, Image, Container} from 'react-bootstrap';
 import {auth} from './Config/Config'
-import {getAuth, signInWithEmailAndPassword} from 'firebase/auth'
+import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
+
+
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import logo from './Img/logo.png';
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -56,45 +63,66 @@ const Login = () => {
 
     
   }
-
   return (
-    
-    <div className='container login'>
+    <div>
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+  <Container>
+    <Navbar.Brand className="me-auto" href="/">
+      <img className="logo" src={logo} alt="Logo" />
+    </Navbar.Brand>
+    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+    <Navbar.Collapse id="responsive-navbar-nav">
+      <Nav className="ms-auto">
+        <Nav.Link href="#features"></Nav.Link>
+      </Nav>
+      <Nav className="ms-auto">
+        <Nav.Link href="/login">Login</Nav.Link>
+        <Nav.Link eventKey={2} href="/signup">
+          SignUp
+        </Nav.Link>
+      </Nav>
+    </Navbar.Collapse>
+  </Container>
+</Navbar>
 
-      <Row className="landing size">
+    <div className='login-container' >
      
-        <br></br>
-            <br></br>
-            <h2>LOGIN</h2>
-            <hr></hr>
+     <Row className="landing size">
+       <br></br>
+       <br></br>
+       <h2 className='login_container_h2'>LOGIN</h2>
+       <hr></hr>
 
-            {successMsg&&<>
-                <div className='success-msg'>{successMsg}</div>
-                
-            </>}
-           
-      <Form style={{width:"80%", marginLeft:"10%", marginTop:"10%"}} onSubmit={handleLogin}>
+       {successMsg && (
+         <div className='success-msg'>{successMsg}</div>
+       )}
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" required onChange={(e)=>setEmail(e.target.value)} value={email}/>
-      </Form.Group>
+       <Form style={{ width: "80%", marginLeft: "10%", marginTop: "10%" }} onSubmit={handleLogin}>
+         <Form.Group className="mb-3" controlId="formBasicEmail">
+           <Form.Label><b>Email</b></Form.Label>
+           <Form.Control type="email" placeholder="Enter email" required onChange={(e) => setEmail(e.target.value)} value={email} />
+         </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" required onChange={(e)=>setPassword(e.target.value)} value={password}/>
-      </Form.Group>
-      <span className='buttons'><button type="submit" className="button">SUBMIT</button></span>
-    </Form>
-    {errorMsg&&<>
-                <br></br>
-                <div className='error-msg'>{errorMsg}</div>                
-            </>}
+         <Form.Group className="mb-3" controlId="formBasicPassword">
+           <Form.Label><b>Password</b></Form.Label>
+           <Form.Control type="password" placeholder="Password" required onChange={(e) => setPassword(e.target.value)} value={password} />
+         </Form.Group>
+         <span className='buttons'><button type="submit" className="button">SUBMIT</button></span>
+       </Form>
+       {errorMsg && (
+         <>
+           <br></br>
+           <div className='error-msg'>{errorMsg}</div>
+         </>
+       )}
+     </Row>
+   
+   </div>
   
-      </Row>
-
-        </div>
-  )
+    </div>
+    
+  );
+  
 }
 
 export default Login

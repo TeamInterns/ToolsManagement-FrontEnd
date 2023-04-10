@@ -52,12 +52,7 @@ function ToolManagerTableRender({ state }) {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/notifications">Notifications</Nav.Link>
-              {/* <NavDropdown title="Tools">
-                <NavDropdown.Item href="#action/3.1">Spanner</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Hammer</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Plier</NavDropdown.Item>
-                <NavDropdown.Divider />
-              </NavDropdown> */}
+              
             </Nav>
             <Nav>
               <Nav.Link href="/login">Logout</Nav.Link>
@@ -65,7 +60,7 @@ function ToolManagerTableRender({ state }) {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-    <div className="admin-table-container">
+    <div >
       <br></br>
       <br></br>
       <h2>LIST OF MASTER TOOLS</h2>

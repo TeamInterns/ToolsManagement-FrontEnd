@@ -128,7 +128,7 @@ const Notifications = () => {
             <span className="breadcrump" onClick={()=>{window.location.reload(false)}}> Notifications</span>
           </span>
           </div>  
-      <div className="admin-table-container">
+      <div >
 
       <br></br>
       <h2>NOTIFICATIONS</h2>

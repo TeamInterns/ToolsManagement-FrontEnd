@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-// import NavDropdown from "react-bootstrap/NavDropdown";
+
 import { Link } from "react-router-dom";
 import logo from './Img/logo.png'
 import {FaTools} from 'react-icons/fa';
@@ -12,7 +12,7 @@ function UserTableRender({state}){
     const userRole=userTableContents.pop();
     
     return (
-        <div>
+        <body >
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
           <Navbar.Brand href="/"><img className="logo" src={logo} alt="Logo" /></Navbar.Brand>
@@ -20,12 +20,7 @@ function UserTableRender({state}){
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <Link className="addlink" to={{pathname:"/addTools"}} state={{userRole:userRole}}> Add Tools</Link>
-              {/* <NavDropdown title="Tools">
-                <NavDropdown.Item href="#action/3.1">Spanner</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Hammer</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Plier</NavDropdown.Item>
-                <NavDropdown.Divider />
-              </NavDropdown> */}
+              
             </Nav>
             <Nav>
               <Nav.Link href="/login">Logout</Nav.Link>
@@ -34,15 +29,16 @@ function UserTableRender({state}){
         </Container>
       </Navbar>
 
-        <div className="admin-table-container">
+        <div>
       <br></br>
       <br></br>
       <h2>USER OWNED TOOLS</h2>
+      
       <br></br>
       <table className="admin-table">
         <thead>
           <tr>
-            <th>Tool Number</th>
+            <th>Tool Number</th>  
             <th>Tool Name</th>
             <th>Manufacturer</th>
             <th>Max usage Capacity</th>
@@ -79,7 +75,7 @@ function UserTableRender({state}){
         </tbody>
       </table>
     </div>
-    </div>
+    </body>
 
     )
 

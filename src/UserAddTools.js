@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import { useLocation } from "react-router-dom";
-import logo from './Img/logo.png';
-import {ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import {FaTools} from 'react-icons/fa';
+import logo from "./Img/logo.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { FaTools } from "react-icons/fa";
 
 function UserAddTools() {
   const navigate = useNavigate();
@@ -64,8 +64,8 @@ function UserAddTools() {
       const newData = { ...requested };
       newData[toolId] = true;
       setRequested(newData);
-      toast('Your request has been sent successfully', {
-        position: 'top-right',
+      toast("Your request has been sent successfully", {
+        position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -81,7 +81,9 @@ function UserAddTools() {
     <div>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="/"><img className="logo" src={logo} alt="Logo" /></Navbar.Brand>
+          <Navbar.Brand href="/">
+            <img className="logo" src={logo} alt="Logo" />
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
@@ -95,13 +97,28 @@ function UserAddTools() {
         </Container>
       </Navbar>
       <div className="breadcrumps">
-          <span>
-            <span className="breadcrump" onClick={()=>{navigate(-1);}}>Dashboard </span>
-            /
-            <span className="breadcrump" onClick={()=>{window.location.reload(false)}}> Add Tools</span>
+        <span>
+          <span
+            className="breadcrump"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            Dashboard{" "}
           </span>
-          </div>     
-      <div className="admin-table-container">
+          /
+          <span
+            className="breadcrump"
+            onClick={() => {
+              window.location.reload(false);
+            }}
+          >
+            {" "}
+            Add Tools
+          </span>
+        </span>
+      </div>
+      <div>
         <br></br>
         <h2>MASTER TABLE DATA</h2>
         <br></br>
@@ -119,23 +136,12 @@ function UserAddTools() {
             {tools.map((tool, index) => (
               <tr key={tool.toolId}>
                 <td>{tool.toolId}</td>
-                <td><FaTools className="fa"/>{tool.toolName}</td>
+                <td>
+                  <FaTools className="fa" />
+                  {tool.toolName}
+                </td>
                 <td>{tool.quantity}</td>
                 <td>
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    onClick={() => {
-                      const newCounters = [...counters];
-                      newCounters[index]++;
-                      setCounters(newCounters);
-                    }}
-                  >
-                    +
-                  </button>
-                  <span style={{ marginRight: "10%", marginLeft: "10%" }}>
-                    {counters[index]}
-                  </span>
                   <button
                     type="button"
                     className="btn btn-secondary"
@@ -144,8 +150,24 @@ function UserAddTools() {
                       newCounters[index]--;
                       setCounters(newCounters);
                     }}
+                    style={{ backgroundColor: "red" ,display:"inline-block",width:'50px' }}
                   >
                     -
+                  </button>
+                  <span style={{ marginRight: "10%", marginLeft: "10%" }}>
+                    <button style={{ backgroundColor: "grey",width:'100px',display:"inline-block" }}>{counters[index]}</button>
+                  </span>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => {
+                      const newCounters = [...counters];
+                      newCounters[index]++;
+                      setCounters(newCounters);
+                    }}
+                    style={{ backgroundColor: "green" ,display:"inline-block" }}
+                  >
+                    +
                   </button>
                 </td>
                 <td>
@@ -169,7 +191,7 @@ function UserAddTools() {
                     </button>
                   )}
                 </td>
-                <ToastContainer/>
+                <ToastContainer />
               </tr>
             ))}
           </tbody>

@@ -36,7 +36,7 @@ function ToolsTableRender() {
             <span className="breadcrump" onClick={()=>{window.location.reload(false)}}> Tool Objects</span>
           </span>
           </div>         
-        <div className="admin-table-container">
+        <div >
         <br></br>
         
         <h2>LIST OF ALL TOOL OBJECTS</h2>

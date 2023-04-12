@@ -7,6 +7,8 @@ import Dashboard from './Dashboard'
 import UserAddTools from './UserAddTools'
 import Notifications from './Notifications'
 import ToolsTableRender from './ToolsTableRender'
+import ManageTools from './ManageTools'
+import ManageUsers from './ManageUsers'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -22,6 +24,8 @@ function App() {
         <Route path="/addTools" element={<UserAddTools/>}/>
         <Route path="/notifications" element={<Notifications/>}/>
         <Route path="/toolsrender" element={<ToolsTableRender/>}/>
+        <Route path="/managetools" element={<ManageTools/>}/>
+        <Route path="/manageusers" element={<ManageUsers/>}/>
 
       </Routes>
     </BrowserRouter>

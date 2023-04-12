@@ -166,7 +166,8 @@ color:white;
   display: flex;
   justify-content: center;
   margin-top: 5%;
-  color:white
+  color:white;
+  
 }
 
 .signup{
@@ -181,7 +182,13 @@ color:white;
 }
 
 .size{
+  padding: 3%;
   width: 40%;
+  background-color: rgba(255, 255, 255, 0.101);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 10%;
+  
 }
 
 .pointer:hover{
@@ -205,4 +212,65 @@ color:white;
 
 .fa{
   margin-right:10px;
+}
+
+.adding{
+  margin-left: 47%;
+  margin-top: 3%;
+
+}
+
+.model{
+  background-color: #242424;
+  margin-top:10%;
+  margin-left:auto;
+  margin-right: auto;
+  width:50%;
+  color:white;
+  padding:5%;
+  display: flex;
+  justify-content: center;
+}
+
+.models{
+    background-color: #242424;
+    margin-top:1%;
+    margin-left:auto;
+    margin-right: auto;
+    width:50%;
+    color:white;
+    padding:1%;
+    display: flex;
+    justify-content: center;
+    overflow-y:scroll;
+    display: flex;
+}
+
+.modellabel{
+  width:40%;
+  margin-left: 10%;
+}
+
+.modelButton{
+  margin-left: 10%;
+}
+
+.faw{
+  margin-left:50%;
+  background:none;
+  color:white;
+  border:none;
+
+}
+.faw:hover{
+  cursor: pointer;
+}
+
+
+/* .edit{
+  display: flex;
+} */
+
+.editform{
+  margin-right: 5px;
 }

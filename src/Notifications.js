@@ -7,12 +7,20 @@ import 'react-toastify/dist/ReactToastify.css';
 import logo from './Img/logo.png';
 import { useNavigate } from 'react-router-dom';
 import {FaTools} from 'react-icons/fa';
+import Modal from 'react-modal';
 
 const Notifications = () => {
     
     const [notifications, setNotifications] = useState([]);
     const [approve,setApprove]=useState(false);
     const [decline,setDecline]=useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [max,setMax] = useState(0);
+    const [price,setPrice] = useState(0);
+    const [notimes,setNotimes] = useState(0);
+    const [wornoutp,setWornoutp] = useState(0);
+    const [wornoutl,setWornoutl] = useState(0);
+    const [uses,setUses] = useState(0);
     console.log(notifications)
     const navigate = useNavigate();
   
@@ -35,12 +43,12 @@ const Notifications = () => {
         const data={
           "quantity":quantity,
           "manufacturer":manufacturer,
-          "max_usage_capacity":100.00,
-          "no_of_times_used":100,
-          "worn_out_percentage":100,
-          "price":500000.00,
-          "wornOut_limit":30.00,
-          "uses_left":3,
+          "max_usage_capacity":max,
+          "no_of_times_used":notimes,
+          "worn_out_percentage":wornoutp,
+          "price":price,
+          "wornOut_limit":wornoutl,
+          "uses_left":uses,
           "usage_status":true,
           "master":
               {   
@@ -60,18 +68,17 @@ const Notifications = () => {
       body: JSON.stringify(data),
     }).then((response) => {
       console.log(response);
-      console.log(notificationId)
+      console.log(notificationId);
+      setMax(0);
+      setNotimes(0);
+      setPrice(0);
+      setUses(0);
+      setWornoutl(0);
+      setWornoutp(0);
+      setModalOpen(false);
       DeclineRequest(notificationId)
 
-      toast('The request has been Approved', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-      });
+     
       // handle success response
     });
     
@@ -96,7 +103,15 @@ const Notifications = () => {
               console.log(response);
                 // handle success response
                 setDecline(!decline)
-                
+                toast('The request has been Declined', {
+                  position: 'top-right',
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: false,
+                  draggable: false,
+                  progress: undefined,
+                });
                
             }).catch(error => console.error(error));    
       
@@ -157,12 +172,54 @@ const Notifications = () => {
               <td>{notification.status.toString()}</td>
               <td>{notification.master.toolId}</td>
               <td>{notification.user.id}</td>
-              <td><button  type="button" className="btn btn-success"onClick={()=>{ApproveRequest(notification.notificationID,notification.toolName,notification.manufacturer,notification.quantity,notification.master.toolId,notification.user.id)}}>Approve</button>
-              <ToastContainer/>
+              <td><button  type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+         onClick={() => setModalOpen(true)}>Approve</button>
+         <Modal isOpen={modalOpen} onRequestClose={() => setModalOpen(false)} className="models">
+        <form onSubmit={()=>{ApproveRequest(notification.notificationID,notification.toolName,notification.manufacturer,notification.quantity,notification.master.toolId,notification.user.id)}} className="modelform">
+          <label className="modellabel">
+            Max Usage Capacity:
+            <input type="text" value={max} onChange={(e) => setMax(e.target.value)} />
+          </label>
+          <br></br>
+          <br></br>
+          <label className="modellabel">
+            No of Times Used:
+            <input type="number" value={notimes} onChange={(e) => setNotimes(e.target.value)} />
+          </label>
+          <br></br>
+          <br></br>
+          <label className="modellabel">
+            Worn Out %:
+            <input type="number" value={wornoutp} onChange={(e) => setWornoutp(e.target.value)} />
+          </label>
+          <br></br>
+          <br></br>
+          <label className="modellabel">
+            Price:
+            <input type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
+          </label>
+          <br></br>
+          <br></br>
+          <label className="modellabel">
+            Worn Out Limit:
+            <input type="number" value={wornoutl} onChange={(e) => setWornoutl(e.target.value)} />
+          </label>
+          <br></br>
+          <br></br>
+          <label className="modellabel">
+            Uses Left:
+            <input type="number" value={uses} onChange={(e) => setUses(e.target.value)} />
+          </label>
+          <br></br>
+          <br></br>
+          <button type="submit"  class="btn btn-primary modelButton">Approve</button>
+        </form>
+      </Modal>
+      
               </td>
               <td>
                 <button  type="button" className="btn btn-danger" onClick={()=>{DeclineRequest(notification.notificationID)}}>Decline</button>
-                
+                <ToastContainer/>
                 </td>
               
               </tr>
@@ -175,3 +232,6 @@ const Notifications = () => {
 }
 
 export default Notifications
+
+
+//onClick={()=>{ApproveRequest(notification.notificationID,notification.toolName,notification.manufacturer,notification.quantity,notification.master.toolId,notification.user.id)}}

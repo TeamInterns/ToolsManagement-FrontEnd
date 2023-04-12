@@ -51,7 +51,7 @@ function UserTableRender({state}){
             <th>Usage Status</th>
             <th>Uses Left</th>
             <th>Worn Out Limit</th>
-            <th>Worn Outpercentage</th>
+            <th>Worn Out percentage</th>
           </tr>
         </thead>
         <tbody>

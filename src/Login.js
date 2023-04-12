@@ -29,7 +29,7 @@ const Login = () => {
         setTimeout(()=>{
           setSuccessMsg('');
           callFetch();
-      },2000)
+      },1000)
        
        
     }).catch(error=>setErrorMsg(error.message));
